@@ -1,0 +1,20 @@
+{
+    "name": "firevel/model-random-id",
+    "description": "Random ID generator for Laravel.",
+    "keywords": ["laravel", "firevel", "uuid", "random"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Slowik",
+            "email": "michael.slowik@firevel.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Firevel\\ModelRandomId\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
