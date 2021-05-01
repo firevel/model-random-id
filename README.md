@@ -7,7 +7,7 @@ Automatically generate cryptographic random integers that fits mysql BIGINT colu
 Make sure your model id is a BIGINT for example: `$table->bigInteger('id')->primary();`.
 
 
-Add to your model `use Firevel\ModelRandomId\HasRandomId;` and 
+Add to your model `use \Firevel\ModelRandomId\HasRandomId;` and 
 ```
     /**
      * Primary key incrementing.
@@ -16,3 +16,4 @@ Add to your model `use Firevel\ModelRandomId\HasRandomId;` and
      */
     public $incrementing = false;
 ```
+
