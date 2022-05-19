@@ -33,7 +33,7 @@ trait HasRandomId
     {
         static::creating(function ($model) {
             if (empty($model->{$model->getRandomIdKeyName()})) {
-                $model->{$model->getRandomIdKeyName()} = $model->generateRandomId();
+                $model->generateRandomId();
             }
         });
     }
@@ -52,11 +52,21 @@ trait HasRandomId
     }
 
     /**
-     * Generate random identifier.
+     * Generate random id.
+     *
+     * @return self
+     */
+    public function generateRandomId()
+    {
+        $this->{$this->getRandomIdKeyName()} = $this->generateRandomInteger();
+    }
+
+    /**
+     * Generate random integer.
      *
      * @return int
      */
-    protected function generateRandomId(): int
+    protected function generateRandomInteger(): int
     {
         return random_int($this->minimumRandomId, $this->maximumRandomId);
     }
