@@ -31,7 +31,7 @@ trait HasRandomId
      */
     public static function bootHasRandomId(): void
     {
-        static::creating(function ($model) {
+        static::saving(function ($model) {
             if (empty($model->{$model->getRandomIdKeyName()})) {
                 $model->generateRandomId();
             }
