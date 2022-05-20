@@ -59,6 +59,8 @@ trait HasRandomId
     public function generateRandomId()
     {
         $this->{$this->getRandomIdKeyName()} = $this->generateRandomInteger();
+
+        return $this;
     }
 
     /**
