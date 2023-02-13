@@ -8,7 +8,7 @@ Systems using distributed databases like [Cloud Spanner](https://cloud.google.co
 
 ## Installation
 
-Make sure your model id is a BIGINT for example: `$table->bigInteger('id')->primary();`.
+Make sure your model id is a BIGINT for example: `$table->bigInteger('id')->unsigned()->primary();`.
 
 
 Add to your model trait `use \Firevel\ModelRandomId\HasRandomId;` and
