@@ -1,6 +1,6 @@
-# Model random ID generator.
+# Model Random ID Generator for Laravel
 
-This package automatically generate primary id using cryptographic random integers that fit MySQL `BIGINT` column and JavaScript `MAX_SAFE_INTEGER`.
+A package for generating random `BIGINT` IDs as primary keys in Laravel models. These IDs are compatible with MySQL `BIGINT` columns and JavaScript's `MAX_SAFE_INTEGER`.
 
 ### Purpose
 
@@ -8,16 +8,41 @@ Systems using distributed databases like [Cloud Spanner](https://cloud.google.co
 
 ## Installation
 
-Make sure your model id is a BIGINT for example: `$table->bigInteger('id')->unsigned()->primary();`.
+Install the package via Composer:
 
+```bash
+composer require firevel/model-random-id
+```
 
-Add to your model trait `use \Firevel\ModelRandomId\HasRandomId;` and
+## Usage
+
+### Database Setup
+
+Ensure your database table uses a `BIGINT` primary key. For example:
+
+```php
+$table->bigInteger('id')->unsigned()->primary();
 ```
-    /**
-     * Primary key incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
+
+### Model Setup
+
+Add the trait to your model:
+```php
+use \Firevel\ModelRandomId\HasRandomId;
 ```
+
+Disable auto-incrementing for the primary key:
+```php
+/**
+ * Indicates if the IDs are auto-incrementing.
+ *
+ * @var bool
+ */
+public $incrementing = false;
+```
+
+## Limitations
+
+While random number generation reduces the risk of ID collisions, it is not entirely immune to conflicts. The more IDs you generate, the higher the chance of a collision due to the Birthday Paradox—where random sampling within a finite range (in this case, BIGINT) increases the likelihood of overlap as the number of samples grows. For use cases involving millions of rows or extremely high throughput, consider pre-generating a list of unique IDs and distributing them to avoid runtime conflicts. This approach ensures scalability while preserving randomness.
+
 
