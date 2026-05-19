@@ -8,6 +8,8 @@ Distributed databases such as [Cloud Spanner](https://cloud.google.com/spanner) 
 
 ## Installation
 
+Install the package via Composer:
+
 ```bash
 composer require firevel/model-random-id
 ```
@@ -80,6 +82,10 @@ You can also override `generateRandomInteger()` if you need a different generati
 - `bootHasRandomId()` registers a `saving` listener so the id is assigned just before the row is written.
 - `initializeHasRandomId()` runs on every model instance and sets `$incrementing = false`.
 - `generateRandomInteger()` uses PHP's `random_int()`, which draws from the OS CSPRNG.
+
+## Limitations
+
+Random number generation reduces the risk of ID collisions but is not immune to them. The more rows you insert, the higher the chance of a collision due to the [birthday paradox](https://en.wikipedia.org/wiki/Birthday_problem) — random sampling within a finite range (here, 2^53) makes overlap increasingly likely as the table grows. For use cases involving tens of millions of rows or extremely high throughput, consider pre-generating a pool of unique ids and handing them out, or wrapping inserts in retry-on-duplicate-key logic.
 
 ## License
 
