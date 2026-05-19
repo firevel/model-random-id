@@ -39,6 +39,19 @@ trait HasRandomId
     }
 
     /**
+     * Initialize the trait on each model instance.
+     *
+     * Disables auto-increment so the generated random id is used as-is
+     * and the underlying driver does not try to assign one.
+     *
+     * @return void
+     */
+    public function initializeHasRandomId(): void
+    {
+        $this->incrementing = false;
+    }
+
+    /**
      * Get column name with random key.
      *
      * @return string
